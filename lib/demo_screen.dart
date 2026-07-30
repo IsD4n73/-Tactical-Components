@@ -451,6 +451,92 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
               const TacticalEmptyState(message: 'No results found'),
               const SizedBox(height: TacticalSpacing.lg),
 
+              // ---------------- TACTICAL TEXT FIELD ----------------
+              const TacticalSectionHeader('Tactical Text Field'),
+              const SizedBox(height: TacticalSpacing.sm),
+              const TacticalTextField(
+                label: 'Encryption Key ///',
+                hintText: 'Enter 16-character key...',
+                prefixText: '>_ ',
+                suffixIcon: Icons.lock_outline,
+              ),
+              const SizedBox(height: TacticalSpacing.sm),
+              const TacticalTextField(
+                label: 'Access Protocol ///',
+                hintText: 'Required protocol...',
+                errorText: 'INVALID AUTHORIZATION CODE',
+              ),
+              const SizedBox(height: TacticalSpacing.lg),
+
+              // ---------------- PROGRESS BARS ----------------
+              const TacticalSectionHeader('Progress Bars'),
+              const SizedBox(height: TacticalSpacing.sm),
+              const TacticalProgressBar(
+                label: 'System Diagnostics',
+                value: 0.85,
+                color: TacticalColors.green,
+                style: TacticalProgressStyle.segmented,
+              ),
+              const SizedBox(height: TacticalSpacing.sm),
+              const TacticalProgressBar(
+                label: 'Data Sync',
+                value: 0.42,
+                color: TacticalColors.yellow,
+                style: TacticalProgressStyle.solid,
+              ),
+              const SizedBox(height: TacticalSpacing.lg),
+
+              // ---------------- STEP TRACKER ----------------
+              const TacticalSectionHeader('Step Tracker'),
+              const SizedBox(height: TacticalSpacing.sm),
+              const TacticalStepTracker(
+                direction: Axis.vertical,
+                steps: [
+                  TacticalStep(
+                    title: 'Phase 1: Infiltration',
+                    subtitle: 'Secure entry point Alpha-01',
+                    isCompleted: true,
+                  ),
+                  TacticalStep(
+                    title: 'Phase 2: Terminal Breach',
+                    subtitle: 'Download encrypted telemetry data',
+                    isActive: true,
+                  ),
+                  TacticalStep(
+                    title: 'Phase 3: Exfiltration',
+                    subtitle: 'Extract at Helipad Bravo',
+                  ),
+                ],
+              ),
+              const SizedBox(height: TacticalSpacing.lg),
+
+              // ---------------- DIVIDERS & NOTIFICATION BADGES ----------------
+              const TacticalSectionHeader('Divider & Notification Badges'),
+              const SizedBox(height: TacticalSpacing.sm),
+              const TacticalDivider(label: 'SECTION ALPHA'),
+              const SizedBox(height: TacticalSpacing.sm),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: const [
+                  TacticalNotificationBadge(
+                    text: '3',
+                    variant: TacticalBadgeVariant.danger,
+                    child: Icon(Icons.notifications_outlined, color: TacticalColors.textPrimary, size: 28),
+                  ),
+                  TacticalNotificationBadge(
+                    text: 'NEW',
+                    variant: TacticalBadgeVariant.success,
+                    child: Icon(Icons.mail_outline, color: TacticalColors.textPrimary, size: 28),
+                  ),
+                  TacticalNotificationBadge(
+                    text: '!',
+                    variant: TacticalBadgeVariant.warning,
+                    child: Icon(Icons.warning_amber_outlined, color: TacticalColors.textPrimary, size: 28),
+                  ),
+                ],
+              ),
+              const SizedBox(height: TacticalSpacing.lg),
+
               // ---------------- SCAN INDICATOR ----------------
               const TacticalSectionHeader('Scan Indicator'),
               const SizedBox(height: TacticalSpacing.sm),

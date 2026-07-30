@@ -828,3 +828,502 @@ class TacticalMenuButton extends StatelessWidget {
   }
 }
 
+// =====================================================================
+// 12) TACTICAL TEXT FIELD — Input terminale avanzato con stati focus/error
+// =====================================================================
+class TacticalTextField extends StatelessWidget {
+  const TacticalTextField({
+    super.key,
+    this.label,
+    this.hintText,
+    this.errorText,
+    this.controller,
+    this.onChanged,
+    this.onSubmitted,
+    this.prefixText = '>_ ',
+    this.prefixIcon,
+    this.suffixIcon,
+    this.onSuffixTap,
+    this.obscureText = false,
+    this.enabled = true,
+    this.keyboardType,
+  });
+
+  final String? label;
+  final String? hintText;
+  final String? errorText;
+  final TextEditingController? controller;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
+  final String? prefixText;
+  final IconData? prefixIcon;
+  final IconData? suffixIcon;
+  final VoidCallback? onSuffixTap;
+  final bool obscureText;
+  final bool enabled;
+  final TextInputType? keyboardType;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final hasError = errorText != null && errorText!.isNotEmpty;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (label != null) ...[
+          Text(
+            label!.toUpperCase(),
+            style: textTheme.labelLarge?.copyWith(
+              color: hasError ? TacticalColors.red : TacticalColors.textSecondary,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: TacticalSpacing.xs),
+        ],
+        TextField(
+          controller: controller,
+          enabled: enabled,
+          obscureText: obscureText,
+          keyboardType: keyboardType,
+          onChanged: onChanged,
+          onSubmitted: onSubmitted,
+          style: textTheme.bodyLarge?.copyWith(
+            color: enabled ? TacticalColors.textPrimary : TacticalColors.textDisabled,
+          ),
+          decoration: InputDecoration(
+            isDense: true,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: TacticalSpacing.md,
+              vertical: TacticalSpacing.sm + 4,
+            ),
+            filled: true,
+            fillColor: TacticalColors.surface,
+            prefixIcon: prefixIcon != null
+                ? Icon(prefixIcon, size: 18, color: TacticalColors.textSecondary)
+                : null,
+            prefixText: prefixIcon == null ? prefixText : null,
+            prefixStyle: textTheme.bodyLarge?.copyWith(
+              color: TacticalColors.green,
+              fontWeight: FontWeight.bold,
+            ),
+            suffixIcon: suffixIcon != null
+                ? InkWell(
+                    onTap: onSuffixTap,
+                    child: Icon(
+                      suffixIcon,
+                      size: 18,
+                      color: TacticalColors.textSecondary,
+                    ),
+                  )
+                : null,
+            hintText: hintText,
+            hintStyle: textTheme.bodyMedium?.copyWith(
+              color: TacticalColors.textDisabled,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: TacticalSpacing.radius,
+              borderSide: BorderSide(
+                color: hasError ? TacticalColors.red : TacticalColors.outline,
+                width: TacticalSpacing.borderWidth,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: TacticalSpacing.radius,
+              borderSide: BorderSide(
+                color: hasError ? TacticalColors.red : TacticalColors.green,
+                width: TacticalSpacing.borderWidth,
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: TacticalSpacing.radius,
+              borderSide: const BorderSide(
+                color: TacticalColors.outline,
+                width: TacticalSpacing.borderWidth,
+              ),
+            ),
+          ),
+        ),
+        if (hasError) ...[
+          const SizedBox(height: TacticalSpacing.xs),
+          Text(
+            errorText!.toUpperCase(),
+            style: textTheme.labelSmall?.copyWith(
+              color: TacticalColors.red,
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+// =====================================================================
+// 13) TACTICAL PROGRESS BAR — Indicatori di progresso lineari
+// =====================================================================
+enum TacticalProgressStyle { segmented, solid }
+
+class TacticalProgressBar extends StatelessWidget {
+  const TacticalProgressBar({
+    super.key,
+    required this.value,
+    this.label,
+    this.showPercentage = true,
+    this.color = TacticalColors.green,
+    this.backgroundColor = TacticalColors.surfaceHigh,
+    this.style = TacticalProgressStyle.segmented,
+    this.segments = 10,
+    this.height = 16,
+  });
+
+  final double value;
+  final String? label;
+  final bool showPercentage;
+  final Color color;
+  final Color backgroundColor;
+  final TacticalProgressStyle style;
+  final int segments;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final clampedValue = value.clamp(0.0, 1.0);
+    final percentageInt = (clampedValue * 100).toInt();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (label != null || showPercentage) ...[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (label != null)
+                Text(
+                  label!.toUpperCase(),
+                  style: textTheme.labelLarge?.copyWith(
+                    color: TacticalColors.textSecondary,
+                  ),
+                ),
+              if (showPercentage)
+                Text(
+                  '[$percentageInt%]',
+                  style: textTheme.labelLarge?.copyWith(
+                    color: color,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(height: TacticalSpacing.xs),
+        ],
+        Container(
+          height: height,
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            border: Border.all(
+              color: TacticalColors.outline,
+              width: TacticalSpacing.borderWidth,
+            ),
+          ),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final totalWidth = constraints.maxWidth;
+              if (style == TacticalProgressStyle.solid) {
+                return Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    width: totalWidth * clampedValue,
+                    color: color,
+                  ),
+                );
+              } else {
+                final filledSegments = (clampedValue * segments).round();
+                return Row(
+                  children: [
+                    for (int i = 0; i < segments; i++) ...[
+                      if (i > 0) const SizedBox(width: 2),
+                      Expanded(
+                        child: Container(
+                          color: i < filledSegments ? color : Colors.transparent,
+                        ),
+                      ),
+                    ],
+                  ],
+                );
+              }
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// =====================================================================
+// 14) TACTICAL STEP TRACKER — Timeline/Tracker fasi del processo
+// =====================================================================
+class TacticalStep {
+  const TacticalStep({
+    required this.title,
+    this.subtitle,
+    this.isCompleted = false,
+    this.isActive = false,
+  });
+
+  final String title;
+  final String? subtitle;
+  final bool isCompleted;
+  final bool isActive;
+}
+
+class TacticalStepTracker extends StatelessWidget {
+  const TacticalStepTracker({
+    super.key,
+    required this.steps,
+    this.direction = Axis.horizontal,
+  });
+
+  final List<TacticalStep> steps;
+  final Axis direction;
+
+  @override
+  Widget build(BuildContext context) {
+    if (direction == Axis.horizontal) {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (int i = 0; i < steps.length; i++) ...[
+            if (i > 0)
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 14),
+                  height: 1,
+                  color: steps[i].isCompleted || steps[i].isActive
+                      ? TacticalColors.green
+                      : TacticalColors.outline,
+                ),
+              ),
+            _buildStepNode(context, steps[i], i + 1),
+          ],
+        ],
+      );
+    } else {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (int i = 0; i < steps.length; i++) ...[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  children: [
+                    _buildStepNode(context, steps[i], i + 1),
+                    if (i < steps.length - 1)
+                      Container(
+                        width: 1,
+                        height: 24,
+                        color: steps[i + 1].isCompleted || steps[i + 1].isActive
+                            ? TacticalColors.green
+                            : TacticalColors.outline,
+                      ),
+                  ],
+                ),
+                const SizedBox(width: TacticalSpacing.md),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          steps[i].title.toUpperCase(),
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                color: steps[i].isActive || steps[i].isCompleted
+                                    ? TacticalColors.textPrimary
+                                    : TacticalColors.textDisabled,
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
+                        if (steps[i].subtitle != null) ...[
+                          const SizedBox(height: 2),
+                          Text(
+                            steps[i].subtitle!,
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: TacticalColors.textSecondary,
+                                ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ],
+      );
+    }
+  }
+
+  Widget _buildStepNode(BuildContext context, TacticalStep step, int index) {
+    final color = step.isCompleted
+        ? TacticalColors.green
+        : step.isActive
+            ? TacticalColors.yellow
+            : TacticalColors.textDisabled;
+
+    final indexStr = index < 10 ? '0$index' : '$index';
+
+    return Container(
+      width: 28,
+      height: 28,
+      decoration: BoxDecoration(
+        color: step.isCompleted || step.isActive
+            ? TacticalColors.surface
+            : TacticalColors.background,
+        border: Border.all(
+          color: color,
+          width: TacticalSpacing.borderWidth,
+        ),
+      ),
+      child: Center(
+        child: step.isCompleted
+            ? const Icon(Icons.check, size: 14, color: TacticalColors.green)
+            : Text(
+                indexStr,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: color,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+      ),
+    );
+  }
+}
+
+// =====================================================================
+// 15) TACTICAL DIVIDER — Separatore tattico con etichetta opzionale
+// =====================================================================
+class TacticalDivider extends StatelessWidget {
+  const TacticalDivider({
+    super.key,
+    this.label,
+    this.color = TacticalColors.outline,
+    this.labelColor = TacticalColors.textSecondary,
+    this.height = 1,
+    this.margin = const EdgeInsets.symmetric(vertical: TacticalSpacing.md),
+  });
+
+  final String? label;
+  final Color color;
+  final Color labelColor;
+  final double height;
+  final EdgeInsetsGeometry margin;
+
+  @override
+  Widget build(BuildContext context) {
+    if (label == null) {
+      return Padding(
+        padding: margin,
+        child: Divider(
+          height: height,
+          thickness: height,
+          color: color,
+        ),
+      );
+    }
+
+    return Padding(
+      padding: margin,
+      child: Row(
+        children: [
+          Expanded(child: Divider(height: height, thickness: height, color: color)),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: TacticalSpacing.sm),
+            child: Text(
+              label!.toUpperCase(),
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: labelColor,
+                    letterSpacing: 1.2,
+                  ),
+            ),
+          ),
+          Expanded(child: Divider(height: height, thickness: height, color: color)),
+        ],
+      ),
+    );
+  }
+}
+
+// =====================================================================
+// 16) TACTICAL NOTIFICATION BADGE — Overlay di notifica per icone/widget
+// =====================================================================
+class TacticalNotificationBadge extends StatelessWidget {
+  const TacticalNotificationBadge({
+    super.key,
+    required this.child,
+    this.text,
+    this.variant = TacticalBadgeVariant.danger,
+    this.showBadge = true,
+  });
+
+  final Widget child;
+  final String? text;
+  final TacticalBadgeVariant variant;
+  final bool showBadge;
+
+  @override
+  Widget build(BuildContext context) {
+    if (!showBadge) return child;
+
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        child,
+        Positioned(
+          top: -4,
+          right: -4,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+            decoration: BoxDecoration(
+              color: TacticalColors.background,
+              border: Border.all(
+                color: _color,
+                width: 1,
+              ),
+            ),
+            child: Text(
+              (text ?? '!').toUpperCase(),
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: _color,
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                    height: 1.0,
+                  ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Color get _color {
+    switch (variant) {
+      case TacticalBadgeVariant.neutral:
+        return TacticalColors.textSecondary;
+      case TacticalBadgeVariant.success:
+        return TacticalColors.green;
+      case TacticalBadgeVariant.warning:
+        return TacticalColors.yellow;
+      case TacticalBadgeVariant.danger:
+        return TacticalColors.red;
+      case TacticalBadgeVariant.info:
+        return TacticalColors.blue;
+    }
+  }
+}
+
+

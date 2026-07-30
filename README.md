@@ -517,6 +517,71 @@ Scaffold(
 )
 ```
 
+### 12. `TacticalTextField`
+
+Terminal input field with top label, monospace font, green focus border, and red error state support.
+
+```dart
+TacticalTextField(
+  label: 'Encryption Key ///',
+  hintText: 'Enter 16-character key...',
+  prefixText: '>_ ',
+  suffixIcon: Icons.lock_outline,
+  onChanged: (text) {},
+)
+```
+
+### 13. `TacticalProgressBar`
+
+Linear progress gauge with percentage readout in `segmented` or `solid` bar style.
+
+```dart
+TacticalProgressBar(
+  label: 'System Diagnostics',
+  value: 0.85,
+  color: TacticalColors.green,
+  style: TacticalProgressStyle.segmented,
+)
+```
+
+### 14. `TacticalStepTracker`
+
+Numbered phase/step timeline tracker (`01`, `02`, `03`) connected by 1px tactical lines.
+
+```dart
+TacticalStepTracker(
+  direction: Axis.vertical,
+  steps: const [
+    TacticalStep(title: 'Phase 1: Infiltration', isCompleted: true),
+    TacticalStep(title: 'Phase 2: Terminal Breach', isActive: true),
+    TacticalStep(title: 'Phase 3: Exfiltration'),
+  ],
+)
+```
+
+### 15. `TacticalDivider`
+
+Terminal 1px divider line with optional centered label string.
+
+```dart
+TacticalDivider(
+  label: 'SECTION ALPHA',
+  color: TacticalColors.outline,
+)
+```
+
+### 16. `TacticalNotificationBadge`
+
+Overlay notification badge wrapping any widget with corner alert badge.
+
+```dart
+TacticalNotificationBadge(
+  text: '3',
+  variant: TacticalBadgeVariant.danger,
+  child: Icon(Icons.notifications_outlined),
+)
+```
+
 ---
 
 ## 📺 Demo Application (`lib/demo_screen.dart`)
