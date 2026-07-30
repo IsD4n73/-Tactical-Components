@@ -60,10 +60,16 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
     super.dispose();
   }
 
+  int _drawerNavIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const Padding(
+          padding: EdgeInsets.all(TacticalSpacing.xs),
+          child: TacticalMenuButton(),
+        ),
         title: const TacticalText('TACTICAL MAP ///'),
         actions: [
           IconButton(
@@ -71,6 +77,51 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
             onPressed: () {},
           ),
         ],
+      ),
+      drawer: TacticalDrawer(
+        title: 'NAVIGATION ///',
+        currentIndex: _drawerNavIndex,
+        onItemTap: (index) => setState(() => _drawerNavIndex = index),
+        items: const [
+          TacticalMenuItem(
+            label: 'Tactical Map',
+            icon: Icons.map_outlined,
+            selectedIcon: Icons.map,
+            badge: 'v0.4',
+            badgeVariant: TacticalBadgeVariant.success,
+          ),
+          TacticalMenuItem(
+            label: 'Active Objectives',
+            icon: Icons.checklist_outlined,
+            selectedIcon: Icons.checklist,
+            badge: '3 ACTIVE',
+            badgeVariant: TacticalBadgeVariant.warning,
+          ),
+          TacticalMenuItem(
+            label: 'Key Database',
+            icon: Icons.vpn_key_outlined,
+            selectedIcon: Icons.vpn_key,
+          ),
+          TacticalMenuItem(
+            label: 'System Diagnostics',
+            icon: Icons.analytics_outlined,
+            selectedIcon: Icons.analytics,
+            badge: 'OK',
+            badgeVariant: TacticalBadgeVariant.info,
+          ),
+          TacticalMenuItem(
+            label: 'Terminal Settings',
+            icon: Icons.settings_outlined,
+            selectedIcon: Icons.settings,
+          ),
+        ],
+        footer: const Text(
+          'TAC_SYS v1.0.0 /// SYSTEM ONLINE',
+          style: TextStyle(
+            color: TacticalColors.textSecondary,
+            fontSize: 11,
+          ),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

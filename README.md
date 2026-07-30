@@ -478,6 +478,45 @@ TacticalScanIndicator(
 )
 ```
 
+### 11. `TacticalDrawer`, `TacticalMenuItem` & `TacticalMenuButton`
+
+Military terminal styled side navigation drawer and square hamburger trigger button.
+
+```dart
+// Hamburger Menu Button (AppBar leading or toolbar)
+AppBar(
+  leading: const Padding(
+    padding: EdgeInsets.all(TacticalSpacing.xs),
+    child: TacticalMenuButton(),
+  ),
+)
+
+// Tactical Side Navigation Drawer
+Scaffold(
+  drawer: TacticalDrawer(
+    title: 'NAVIGATION ///',
+    currentIndex: selectedIndex,
+    onItemTap: (index) => setState(() => selectedIndex = index),
+    items: const [
+      TacticalMenuItem(
+        label: 'Tactical Map',
+        icon: Icons.map_outlined,
+        selectedIcon: Icons.map,
+        badge: 'v0.4',
+        badgeVariant: TacticalBadgeVariant.success,
+      ),
+      TacticalMenuItem(
+        label: 'Active Objectives',
+        icon: Icons.checklist_outlined,
+        badge: '3 ACTIVE',
+        badgeVariant: TacticalBadgeVariant.warning,
+      ),
+    ],
+    footer: const Text('TAC_SYS v1.0.0 /// SYSTEM ONLINE'),
+  ),
+)
+```
+
 ---
 
 ## 📺 Demo Application (`lib/demo_screen.dart`)
