@@ -1,0 +1,20 @@
+name: tactical_components_example
+description: "Demonstrates how to use the tactical_components library."
+publish_to: 'none'
+
+environment:
+  sdk: ^3.12.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  tactical_components:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
