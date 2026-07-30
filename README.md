@@ -582,6 +582,71 @@ TacticalNotificationBadge(
 )
 ```
 
+### 17. `TacticalRadioGroup`
+
+Single-choice radio option selector with square check indicators `[X]` and monospace uppercase labels.
+
+```dart
+TacticalRadioGroup<String>(
+  selectedValue: selectedOption,
+  onChanged: (val) => setState(() => selectedOption = val),
+  options: const [
+    TacticalRadioOption(value: 'opt1', label: 'Protocol Alpha'),
+    TacticalRadioOption(value: 'opt2', label: 'Protocol Beta'),
+  ],
+)
+```
+
+### 18. `TacticalPanel`
+
+Universal HUD container with 1px border, dark surface background, and optional colored accent top/left stripe.
+
+```dart
+TacticalPanel(
+  title: 'TELEMETRY PANEL',
+  accentColor: TacticalColors.green,
+  accentPosition: TacticalPanelAccentPosition.top,
+  child: Text('Panel contents...'),
+)
+```
+
+### 19. `TacticalSkeleton`
+
+Animated terminal loading placeholder with pulsing opacity effect.
+
+```dart
+TacticalSkeleton(
+  width: 200,
+  height: 18,
+)
+```
+
+### 20. `TacticalKpiCard`
+
+Compact stat card featuring prominent metric values, unit labels, icons, and trend indicators (`▲ +2.4%`).
+
+```dart
+TacticalKpiCard(
+  title: 'STAMINA',
+  value: '98',
+  unit: '%',
+  trend: '▲ +2.4%',
+  trendColor: TacticalColors.green,
+  icon: Icons.flash_on,
+)
+```
+
+### 21. `TacticalTooltip`
+
+Contextual terminal info tooltip wrapper with 1px border and uppercase text.
+
+```dart
+TacticalTooltip(
+  message: 'LIVE TELEMETRY FEED ACTIVE',
+  child: Icon(Icons.info_outline),
+)
+```
+
 ---
 
 ## 📺 Demo Application (`lib/demo_screen.dart`)

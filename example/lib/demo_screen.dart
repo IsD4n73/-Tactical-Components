@@ -49,6 +49,7 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
   final _filterController = TextEditingController();
 
   int _customNavIndex = 2;
+  String _selectedRadio = 'opt1';
 
   @override
   void dispose() {
@@ -556,6 +557,71 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: TacticalSpacing.lg),
+
+              // ---------------- RADIO GROUP & KPI CARDS ----------------
+              const TacticalSectionHeader('Radio Group & KPI Cards'),
+              const SizedBox(height: TacticalSpacing.sm),
+              TacticalRadioGroup<String>(
+                selectedValue: _selectedRadio,
+                onChanged: (val) => setState(() => _selectedRadio = val),
+                options: const [
+                  TacticalRadioOption(value: 'opt1', label: 'Protocol Alpha - High Security'),
+                  TacticalRadioOption(value: 'opt2', label: 'Protocol Beta - Stealth Mode'),
+                  TacticalRadioOption(value: 'opt3', label: 'Protocol Gamma - Standard Bypass'),
+                ],
+              ),
+              const SizedBox(height: TacticalSpacing.md),
+              Row(
+                children: [
+                  Expanded(
+                    child: TacticalKpiCard(
+                      title: 'STAMINA',
+                      value: '98',
+                      unit: '%',
+                      trend: '▲ +2.4%',
+                      trendColor: TacticalColors.green,
+                      icon: Icons.flash_on,
+                    ),
+                  ),
+                  const SizedBox(width: TacticalSpacing.sm),
+                  Expanded(
+                    child: TacticalKpiCard(
+                      title: 'SIGNAL',
+                      value: '450',
+                      unit: 'MHz',
+                      trend: '▼ -0.8%',
+                      trendColor: TacticalColors.red,
+                      badge: 'SECURE',
+                      badgeVariant: TacticalBadgeVariant.success,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: TacticalSpacing.lg),
+
+              // ---------------- PANEL, TOOLTIP & SKELETON ----------------
+              const TacticalSectionHeader('Panel, Tooltip & Skeleton'),
+              const SizedBox(height: TacticalSpacing.sm),
+              TacticalPanel(
+                title: 'TACTICAL TELEMETRY PANEL',
+                accentColor: TacticalColors.green,
+                accentPosition: TacticalPanelAccentPosition.top,
+                headerAction: TacticalTooltip(
+                  message: 'LIVE TELEMETRY FEED ACTIVE',
+                  child: const TacticalStatusBadge('LIVE', variant: TacticalBadgeVariant.success),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text('Loading tactical satellite data stream...'),
+                    SizedBox(height: TacticalSpacing.sm),
+                    TacticalSkeleton(height: 14),
+                    SizedBox(height: 6),
+                    TacticalSkeleton(width: 200, height: 14),
+                  ],
+                ),
               ),
               const SizedBox(height: TacticalSpacing.lg),
 
