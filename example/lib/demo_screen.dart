@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'theme.dart';
-import 'tactical_widgets.dart';
-import 'tactical_widgets_extended.dart';
+import 'package:tactical_components/tactical_components.dart';
 
 /// ============================================================
 /// DEMO SCREEN
@@ -11,8 +9,6 @@ import 'tactical_widgets_extended.dart';
 /// Per avviarla:
 ///   void main() => runApp(const TacticalDemoApp());
 /// ============================================================
-
-void main() => runApp(const TacticalDemoApp());
 
 class TacticalDemoApp extends StatelessWidget {
   const TacticalDemoApp({super.key});
@@ -72,10 +68,7 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
         ),
         title: const TacticalText('TACTICAL MAP ///'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert),
-            onPressed: () {},
-          ),
+          IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
         ],
       ),
       drawer: TacticalDrawer(
@@ -117,10 +110,7 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
         ],
         footer: const Text(
           'TAC_SYS v1.0.0 /// SYSTEM ONLINE',
-          style: TextStyle(
-            color: TacticalColors.textSecondary,
-            fontSize: 11,
-          ),
+          style: TextStyle(color: TacticalColors.textSecondary, fontSize: 11),
         ),
       ),
       body: SafeArea(
@@ -198,10 +188,7 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
                     selectedColor: _selectedColor,
                     onChanged: (c) => setState(() => _selectedColor = c),
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text('Undo'),
-                  ),
+                  TextButton(onPressed: () {}, child: const Text('Undo')),
                 ],
               ),
               const SizedBox(height: TacticalSpacing.lg),
@@ -317,7 +304,9 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
               const SizedBox(height: TacticalSpacing.sm),
               Container(
                 decoration: const BoxDecoration(
-                  border: Border(bottom: BorderSide(color: TacticalColors.outline)),
+                  border: Border(
+                    bottom: BorderSide(color: TacticalColors.outline),
+                  ),
                 ),
                 child: TacticalSearchField(
                   controller: _filterController,
@@ -333,7 +322,9 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
                 children: [
                   const Text('You can join our '),
                   TacticalInlineLink('<:Community/>', onTap: () {}),
-                  const Text(' where you can leave feedback to help us make Tac Map even better.'),
+                  const Text(
+                    ' where you can leave feedback to help us make Tac Map even better.',
+                  ),
                 ],
               ),
               const SizedBox(height: TacticalSpacing.md),
@@ -380,22 +371,41 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
               const TacticalCounterHeader(title: 'Active Objectives', count: 3),
               TacticalTaskListItem(
                 title: 'Alpha Sector Recon',
-                badges: const [TacticalStatusBadge('0.4', variant: TacticalBadgeVariant.success)],
+                badges: const [
+                  TacticalStatusBadge(
+                    '0.4',
+                    variant: TacticalBadgeVariant.success,
+                  ),
+                ],
                 onTap: () {},
               ),
               TacticalTaskListItem(
                 title: 'Substation Breach',
                 badges: const [
-                  TacticalStatusBadge('LCKD', variant: TacticalBadgeVariant.danger),
-                  TacticalStatusBadge('DR', variant: TacticalBadgeVariant.danger),
-                  TacticalStatusBadge('0.4', variant: TacticalBadgeVariant.success),
+                  TacticalStatusBadge(
+                    'LCKD',
+                    variant: TacticalBadgeVariant.danger,
+                  ),
+                  TacticalStatusBadge(
+                    'DR',
+                    variant: TacticalBadgeVariant.danger,
+                  ),
+                  TacticalStatusBadge(
+                    '0.4',
+                    variant: TacticalBadgeVariant.success,
+                  ),
                 ],
                 onTap: () {},
               ),
               TacticalTaskListItem(
                 title: 'Data Link Transfer',
                 showSwapIcon: true,
-                badges: const [TacticalStatusBadge('0.4', variant: TacticalBadgeVariant.success)],
+                badges: const [
+                  TacticalStatusBadge(
+                    '0.4',
+                    variant: TacticalBadgeVariant.success,
+                  ),
+                ],
                 onTap: () {},
               ),
               const SizedBox(height: TacticalSpacing.lg),
@@ -521,17 +531,29 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
                   TacticalNotificationBadge(
                     text: '3',
                     variant: TacticalBadgeVariant.danger,
-                    child: Icon(Icons.notifications_outlined, color: TacticalColors.textPrimary, size: 28),
+                    child: Icon(
+                      Icons.notifications_outlined,
+                      color: TacticalColors.textPrimary,
+                      size: 28,
+                    ),
                   ),
                   TacticalNotificationBadge(
                     text: 'NEW',
                     variant: TacticalBadgeVariant.success,
-                    child: Icon(Icons.mail_outline, color: TacticalColors.textPrimary, size: 28),
+                    child: Icon(
+                      Icons.mail_outline,
+                      color: TacticalColors.textPrimary,
+                      size: 28,
+                    ),
                   ),
                   TacticalNotificationBadge(
                     text: '!',
                     variant: TacticalBadgeVariant.warning,
-                    child: Icon(Icons.warning_amber_outlined, color: TacticalColors.textPrimary, size: 28),
+                    child: Icon(
+                      Icons.warning_amber_outlined,
+                      color: TacticalColors.textPrimary,
+                      size: 28,
+                    ),
                   ),
                 ],
               ),

@@ -1,6 +1,5 @@
-library tactical_components;
+library;
 
 export 'theme.dart';
 export 'tactical_widgets.dart';
 export 'tactical_widgets_extended.dart';
-export 'demo_screen.dart';
