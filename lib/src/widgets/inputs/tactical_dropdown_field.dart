@@ -52,7 +52,13 @@ class TacticalDropdownField<T> extends StatelessWidget {
                   Container(width: 10, height: 10, color: o.indicatorColor),
                   const SizedBox(width: TacticalSpacing.sm),
                 ],
-                Text(o.label, style: textTheme.bodyLarge),
+                Expanded(
+                  child: Text(
+                    o.label,
+                    style: textTheme.bodyLarge,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ],
             ),
           ),
@@ -66,9 +72,12 @@ class TacticalDropdownField<T> extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              current.label.toUpperCase(),
-              style: textTheme.labelLarge?.copyWith(color: Colors.white),
+            Flexible(
+              child: Text(
+                current.label.toUpperCase(),
+                style: textTheme.labelLarge?.copyWith(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             const SizedBox(width: 4),
             const Icon(Icons.arrow_drop_down, color: Colors.white, size: 18),

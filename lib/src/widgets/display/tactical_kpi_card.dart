@@ -72,11 +72,14 @@ class TacticalKpiCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: [
-              Text(
-                value,
-                style: textTheme.headlineMedium?.copyWith(
-                  color: TacticalColors.textPrimary,
-                  fontWeight: FontWeight.bold,
+              Flexible(
+                child: Text(
+                  value,
+                  style: textTheme.headlineMedium?.copyWith(
+                    color: TacticalColors.textPrimary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               if (unit != null) ...[
@@ -86,6 +89,7 @@ class TacticalKpiCard extends StatelessWidget {
                   style: textTheme.labelMedium?.copyWith(
                     color: TacticalColors.textSecondary,
                   ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ],

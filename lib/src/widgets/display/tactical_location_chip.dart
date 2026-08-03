@@ -43,7 +43,13 @@ class TacticalLocationChip extends StatelessWidget {
           children: [
             Icon(icon, color: iconColor, size: 18),
             const SizedBox(width: TacticalSpacing.sm),
-            Text(label, style: Theme.of(context).textTheme.bodyLarge),
+            Flexible(
+              child: Text(
+                label,
+                style: Theme.of(context).textTheme.bodyLarge,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             if (showTrailingIcon) ...[
               const SizedBox(width: TacticalSpacing.sm),
               Icon(trailingIcon, color: trailingIconColor, size: 16),

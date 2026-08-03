@@ -60,12 +60,16 @@ class _TacticalExpandableSectionState
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    widget.title.toUpperCase(),
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleMedium?.copyWith(color: _color),
+                  Expanded(
+                    child: Text(
+                      widget.title.toUpperCase(),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleMedium?.copyWith(color: _color),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
+                  const SizedBox(width: TacticalSpacing.sm),
                   Icon(
                     _expanded ? Icons.remove : Icons.add,
                     color: _color,

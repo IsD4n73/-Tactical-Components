@@ -43,8 +43,14 @@ class TacticalDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
+    final screenWidth = MediaQuery.of(context).size.width;
+    final effectiveWidth =
+        screenWidth > 0 && width > screenWidth * 0.85
+            ? screenWidth * 0.85
+            : width;
+
     return Drawer(
-      width: width,
+      width: effectiveWidth,
       elevation: 0,
       shape: const RoundedRectangleBorder(
         borderRadius: TacticalSpacing.radius,
@@ -165,6 +171,7 @@ class TacticalDrawer extends StatelessWidget {
                                     ? FontWeight.w700
                                     : FontWeight.w500,
                               ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           if (item.badge != null) ...[

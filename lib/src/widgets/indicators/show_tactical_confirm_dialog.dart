@@ -14,6 +14,7 @@ Future<bool?> showTacticalConfirmDialog(
     builder: (context) => AlertDialog(
       title: Text(title.toUpperCase()),
       content: Text(message),
+      actionsOverflowDirection: VerticalDirection.down,
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(false),

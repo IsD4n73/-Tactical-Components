@@ -25,7 +25,14 @@ class TacticalCounterHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title.toUpperCase(), style: textTheme.titleSmall),
+          Expanded(
+            child: Text(
+              title.toUpperCase(),
+              style: textTheme.titleSmall,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const SizedBox(width: TacticalSpacing.sm),
           Text('[$count]', style: textTheme.titleSmall),
         ],
       ),

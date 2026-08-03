@@ -47,9 +47,15 @@ class TacticalToolbarSelectGroup extends StatelessWidget {
                     vertical: TacticalSpacing.sm + 4,
                   ),
                   child: Row(
-                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(item.label.toUpperCase(), style: textTheme.labelLarge),
+                      Expanded(
+                        child: Text(
+                          item.label.toUpperCase(),
+                          style: textTheme.labelLarge,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      ),
                       const SizedBox(width: 4),
                       const Icon(
                         Icons.arrow_drop_down,

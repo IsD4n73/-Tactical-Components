@@ -24,27 +24,31 @@ class TacticalSegmentedControl extends StatelessWidget {
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.labelLarge;
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: List.generate(options.length, (i) {
-        final selected = i == selectedIndex;
-        return InkWell(
-          onTap: () => onChanged(i),
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: TacticalSpacing.md,
-              vertical: TacticalSpacing.sm,
-            ),
-            color: selected ? selectedColor : unselectedBackground,
-            child: Text(
-              options[i],
-              style: textStyle?.copyWith(
-                color: selected ? Colors.white : Colors.black,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: List.generate(options.length, (i) {
+          final selected = i == selectedIndex;
+          return InkWell(
+            onTap: () => onChanged(i),
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: TacticalSpacing.md,
+                vertical: TacticalSpacing.sm,
+              ),
+              color: selected ? selectedColor : unselectedBackground,
+              child: Text(
+                options[i],
+                style: textStyle?.copyWith(
+                  color: selected ? Colors.white : Colors.black,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
-          ),
-        );
-      }),
+          );
+        }),
+      ),
     );
   }
 }

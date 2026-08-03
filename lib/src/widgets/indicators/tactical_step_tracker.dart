@@ -29,23 +29,27 @@ class TacticalStepTracker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (direction == Axis.horizontal) {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (int i = 0; i < steps.length; i++) ...[
-            if (i > 0)
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 14),
-                  height: 1,
-                  color: steps[i].isCompleted || steps[i].isActive
-                      ? TacticalColors.green
-                      : TacticalColors.outline,
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (int i = 0; i < steps.length; i++) ...[
+              if (i > 0)
+                SizedBox(
+                  width: 32,
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 14),
+                    height: 1,
+                    color: steps[i].isCompleted || steps[i].isActive
+                        ? TacticalColors.green
+                        : TacticalColors.outline,
+                  ),
                 ),
-              ),
-            _buildStepNode(context, steps[i], i + 1),
+              _buildStepNode(context, steps[i], i + 1),
+            ],
           ],
-        ],
+        ),
       );
     } else {
       return Column(
@@ -83,6 +87,7 @@ class TacticalStepTracker extends StatelessWidget {
                                     : TacticalColors.textDisabled,
                                 fontWeight: FontWeight.w600,
                               ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                         if (steps[i].subtitle != null) ...[
                           const SizedBox(height: 2),
@@ -91,6 +96,7 @@ class TacticalStepTracker extends StatelessWidget {
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                   color: TacticalColors.textSecondary,
                                 ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ],

@@ -41,12 +41,17 @@ class TacticalProgressBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if (label != null)
-                Text(
-                  label!.toUpperCase(),
-                  style: textTheme.labelLarge?.copyWith(
-                    color: TacticalColors.textSecondary,
+                Expanded(
+                  child: Text(
+                    label!.toUpperCase(),
+                    style: textTheme.labelLarge?.copyWith(
+                      color: TacticalColors.textSecondary,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
+              if (label != null && showPercentage)
+                const SizedBox(width: TacticalSpacing.sm),
               if (showPercentage)
                 Text(
                   '[$percentageInt%]',

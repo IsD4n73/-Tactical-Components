@@ -72,26 +72,28 @@ class TacticalRadioGroup<T> extends StatelessWidget {
                     : null,
               ),
               const SizedBox(width: TacticalSpacing.sm),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    option.label.toUpperCase(),
-                    style: textStyle?.copyWith(
-                      color: isSelected ? TacticalColors.textPrimary : TacticalColors.textSecondary,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                    ),
-                  ),
-                  if (option.subtitle != null) ...[
-                    const SizedBox(height: 2),
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
-                      option.subtitle!,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: TacticalColors.textDisabled,
-                          ),
+                      option.label.toUpperCase(),
+                      style: textStyle?.copyWith(
+                        color: isSelected ? TacticalColors.textPrimary : TacticalColors.textSecondary,
+                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      ),
                     ),
+                    if (option.subtitle != null) ...[
+                      const SizedBox(height: 2),
+                      Text(
+                        option.subtitle!,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: TacticalColors.textDisabled,
+                            ),
+                      ),
+                    ],
                   ],
-                ],
+                ),
               ),
             ],
           ),

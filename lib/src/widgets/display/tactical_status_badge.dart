@@ -37,6 +37,7 @@ class TacticalStatusBadge extends StatelessWidget {
         color: _color,
         fontWeight: FontWeight.w700,
       ),
+      overflow: TextOverflow.ellipsis,
     );
   }
 }
@@ -48,14 +49,10 @@ class TacticalBadgeGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        for (var i = 0; i < badges.length; i++) ...[
-          if (i != 0) const SizedBox(width: TacticalSpacing.sm),
-          badges[i],
-        ],
-      ],
+    return Wrap(
+      spacing: TacticalSpacing.sm,
+      runSpacing: TacticalSpacing.xs,
+      children: badges,
     );
   }
 }

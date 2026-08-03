@@ -35,6 +35,8 @@ class TacticalFilledButton extends StatelessWidget {
                   color: foregroundColor,
                   fontWeight: FontWeight.w700,
                 ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
         ),
       ),

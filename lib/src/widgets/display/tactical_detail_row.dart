@@ -26,13 +26,24 @@ class TacticalDetailRow extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                label,
-                style: textTheme.bodyLarge?.copyWith(
-                  color: TacticalColors.textSecondary,
+              Expanded(
+                child: Text(
+                  label,
+                  style: textTheme.bodyLarge?.copyWith(
+                    color: TacticalColors.textSecondary,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Text(value, style: textTheme.bodyLarge),
+              const SizedBox(width: TacticalSpacing.sm),
+              Flexible(
+                child: Text(
+                  value,
+                  style: textTheme.bodyLarge,
+                  textAlign: TextAlign.end,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ],
           ),
         ),

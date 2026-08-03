@@ -33,18 +33,20 @@ class TacticalBottomNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           for (var i = 0; i < items.length; i++)
-            InkWell(
-              onTap: () => onTap(i),
-              child: Padding(
-                padding: const EdgeInsets.all(TacticalSpacing.sm),
-                child: Icon(
-                  i == currentIndex
-                      ? (items[i].selectedIcon ?? items[i].icon)
-                      : items[i].icon,
-                  color: i == currentIndex
-                      ? TacticalColors.green
-                      : TacticalColors.textSecondary,
-                  size: 22,
+            Expanded(
+              child: InkWell(
+                onTap: () => onTap(i),
+                child: Padding(
+                  padding: const EdgeInsets.all(TacticalSpacing.sm),
+                  child: Icon(
+                    i == currentIndex
+                        ? (items[i].selectedIcon ?? items[i].icon)
+                        : items[i].icon,
+                    color: i == currentIndex
+                        ? TacticalColors.green
+                        : TacticalColors.textSecondary,
+                    size: 22,
+                  ),
                 ),
               ),
             ),

@@ -18,23 +18,21 @@ class TacticalColorSwatchPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+    return Wrap(
+      spacing: TacticalSpacing.xs,
+      runSpacing: TacticalSpacing.xs,
       children: colors.map((c) {
         final selected = c.toARGB32() == selectedColor.toARGB32();
-        return Padding(
-          padding: const EdgeInsets.only(right: TacticalSpacing.xs),
-          child: InkWell(
-            onTap: () => onChanged(c),
-            child: Container(
-              width: swatchSize,
-              height: swatchSize,
-              decoration: BoxDecoration(
-                color: c,
-                border: Border.all(
-                  color: selected ? TacticalColors.green : Colors.transparent,
-                  width: 2,
-                ),
+        return InkWell(
+          onTap: () => onChanged(c),
+          child: Container(
+            width: swatchSize,
+            height: swatchSize,
+            decoration: BoxDecoration(
+              color: c,
+              border: Border.all(
+                color: selected ? TacticalColors.green : Colors.transparent,
+                width: 2,
               ),
             ),
           ),

@@ -130,24 +130,27 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
                     bottom: BorderSide(color: TacticalColors.outline),
                   ),
                 ),
-                child: Row(
-                  children: [
-                    TacticalStateToggle(
-                      label: 'Measure',
-                      value: _measure,
-                      onChanged: (v) => setState(() => _measure = v),
-                    ),
-                    TacticalStateToggle(
-                      label: 'Grid',
-                      value: _grid,
-                      onChanged: (v) => setState(() => _grid = v),
-                    ),
-                    TacticalStateToggle(
-                      label: 'Draw',
-                      value: _draw,
-                      onChanged: (v) => setState(() => _draw = v),
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      TacticalStateToggle(
+                        label: 'Measure',
+                        value: _measure,
+                        onChanged: (v) => setState(() => _measure = v),
+                      ),
+                      TacticalStateToggle(
+                        label: 'Grid',
+                        value: _grid,
+                        onChanged: (v) => setState(() => _grid = v),
+                      ),
+                      TacticalStateToggle(
+                        label: 'Draw',
+                        value: _draw,
+                        onChanged: (v) => setState(() => _draw = v),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: TacticalSpacing.lg),
@@ -197,16 +200,18 @@ class _TacticalDemoScreenState extends State<TacticalDemoScreen> {
               // ---------------- ACTION BUTTONS + CLOSE ----------------
               const TacticalSectionHeader('Action Buttons'),
               const SizedBox(height: TacticalSpacing.sm),
-              Row(
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: TacticalSpacing.sm,
+                runSpacing: TacticalSpacing.sm,
                 children: [
                   TacticalFilledButton(label: 'Back', onPressed: () {}),
-                  const SizedBox(width: TacticalSpacing.sm),
                   TacticalFilledButton(
                     label: 'Key',
                     backgroundColor: TacticalFilledButton.neutralBackground,
                     onPressed: () {},
                   ),
-                  const Spacer(),
                   TacticalCloseButton(onPressed: () {}),
                 ],
               ),

@@ -42,7 +42,13 @@ class TacticalStateToggle extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(label.toUpperCase(), style: textStyle),
+            Flexible(
+              child: Text(
+                label.toUpperCase(),
+                style: textStyle,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             const SizedBox(width: 6),
             Text('[', style: textStyle?.copyWith(color: color)),
             if (value) const SizedBox(width: 2),
